@@ -1,0 +1,123 @@
+# Documentation: Setting Up Apache, NPM, and TypeScript on a Debian Server
+
+This documentation guides IT workers through the process of setting up essential tools such as Apache for web server functionality, NPM (Node Package Manager) for managing Node.js packages, and TypeScript for building scalable and maintainable web applications on a Debian server.
+
+## Step 1: Updating System Packages
+
+1. **Connect to the Server**: Use SSH to connect to your Debian server as the root user or a user with sudo privileges.
+
+2. **Update Package Lists**: Run the following command to update the package lists to the latest versions:
+
+    ```
+    sudo apt update
+    ```
+
+3. **Upgrade Installed Packages**: After updating the package lists, upgrade the installed packages to the latest versions:
+
+    ```
+    sudo apt upgrade
+    ```
+
+## Step 2: Installing Apache
+
+1. **Install Apache**: Use the following command to install the Apache web server:
+
+    ```
+    sudo apt install apache2
+    ```
+
+2. **Start Apache**: Once installed, start the Apache service:
+
+    ```
+    sudo systemctl start apache2
+    ```
+
+3. **Enable Apache**: Enable Apache to start automatically on system boot:
+
+    ```
+    sudo systemctl enable apache2
+    ```
+
+## Step 3: Installing Node.js and NPM
+
+1. **Install Node.js**: Debian's default repositories might not have the latest version of Node.js. It's recommended to use the NodeSource repository for installing Node.js. Follow the instructions on the NodeSource website ([https://github.com/nodesource/distributions](https://github.com/nodesource/distributions)) to install Node.js.
+
+2. **Verify Installation**: After installing Node.js, verify that Node.js and NPM are installed correctly:
+
+    ```
+    node -v
+    npm -v
+    ```
+
+## Step 4: Installing TypeScript
+
+1. **Install TypeScript**: Once Node.js and NPM are installed, use NPM to install TypeScript globally:
+
+    ```
+    sudo npm install -g typescript
+    ```
+
+2. **Verify Installation**: Verify that TypeScript is installed correctly:
+
+    ```
+    tsc -v
+    ```
+
+## Step 5: Setting Up Your Web Application
+
+1. **Create Your Project Directory**: Navigate to the directory where you want to create your web application and initialize a new Node.js project:
+
+    ```
+    mkdir myapp
+    cd myapp
+    npm init -y
+    ```
+
+2. **Install Dependencies**: Install any dependencies required for your web application using NPM:
+
+    ```
+    npm install <package-name>
+    ```
+
+3. **Develop Your Application**: Develop your web application using TypeScript for improved code quality and maintainability.
+
+4. **Compile TypeScript**: Compile your TypeScript files into JavaScript using the TypeScript compiler:
+
+    ```
+    tsc
+    ```
+
+## Step 6: Configuring Apache for Your Web Application
+
+1. **Create Apache Configuration File**: Create a new Apache configuration file for your web application:
+
+    ```
+    sudo nano /etc/apache2/sites-available/myapp.conf
+    ```
+
+2. **Configure Virtual Host**: Add the following configuration to the file, replacing placeholders with your actual settings:
+
+    ```apache
+    <VirtualHost *:80>
+        ServerName yourdomain.com
+        DocumentRoot /path/to/your/app
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+    </VirtualHost>
+    ```
+
+3. **Enable the Virtual Host**: Enable the virtual host configuration:
+
+    ```
+    sudo a2ensite myapp.conf
+    ```
+
+4. **Reload Apache**: Reload Apache to apply the changes:
+
+    ```
+    sudo systemctl reload apache2
+    ```
+
+## Conclusion
+
+By following this documentation, you can set up Apache, NPM, and TypeScript on your Debian server, and configure it to host your web application. Ensure to regularly update your system packages and monitor the server for security vulnerabilities and performance optimizations.
