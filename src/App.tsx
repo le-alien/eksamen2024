@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import './App.css'
-import {NavigationBar} from './components/navigationbar.tsx'
+
 function App() {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
